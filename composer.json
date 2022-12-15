@@ -1,10 +1,10 @@
 {
-    "name": "slakbal/oauth",
-    "description": "Oauth2",
+    "name": "slakbal/siv-oauth",
+    "description": "SIV-Oauth2",
     "keywords": [
         "oauth"
     ],
-    "homepage": "https://github.com/slakbal/oauth",
+    "homepage": "https://github.com/slakbal/siv-oauth",
     "license": "MIT",
     "type": "library",
     "authors": [
