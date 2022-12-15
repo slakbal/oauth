@@ -3,40 +3,11 @@
 namespace Slakbal\Oauth;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Slakbal\Oauth\Providers\SivProvider;
 
-class OauthServiceProvider extends ServiceProvider
+class OauthServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    /**
-     * Bootstrap the application services.
-     */
-    public function boot()
-    {
-        $this->bootSivProvider();
-
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__.'/../config/oauth.php' => config_path('oauth.php'),
-            ], 'config');
-        }
-    }
-
-    protected function bootSivProvider()
-    {
-        $socialite = $this->app->make('Laravel\Socialite\Contracts\Factory');
-
-        $socialite->extend(
-            'siv',
-            function ($app) use ($socialite) {
-
-                //NOTE: This uses tenant() which is a helper 
-                $config = $app['config']['services.'.tenant()->type->getValueLower()];
-
-                return $socialite->buildProvider(SIVProvider::class, $config);
-            }
-        );
-    }
-
     /**
      * Register the application services.
      */
@@ -47,8 +18,37 @@ class OauthServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/oauth.php', 'oauth');
 
         // Register the main class to use with the facade
-        $this->app->bind('oauth', function () {
+        $this->app->bind('oauth', function ($app, $parameters) {
             return new Oauth();
         });
+    }
+
+    /**
+     * Bootstrap the application services.
+     */
+    public function boot()
+    {
+        if ($this->app->runningInConsole()) {
+
+            $this->publishes([
+                __DIR__.'/../config/oauth.php' => config_path('oauth.php'),
+            ], 'config');
+
+        } 
+        else {
+        
+            $socialite = $this->app->make('Laravel\Socialite\Contracts\Factory');
+
+            $socialite->extend(
+                'siv',
+                function ($app) use ($socialite) {
+                    //NOTE: This uses tenant() which is a helper in the main multi-tenancy application
+                    $config = $app['config']['services.'.tenant()->type->getValueLower()];
+
+                    return $socialite->buildProvider(SIVProvider::class, $config);
+                }
+            );
+
+        }
     }
 }
