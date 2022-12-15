@@ -28,7 +28,9 @@ class OauthServiceProvider extends ServiceProvider
         $socialite->extend(
             'siv',
             function ($app) use ($socialite) {
-                $config = $app['config']['services.siv'];
+
+                //NOTE: This uses tenant() which is a helper 
+                $config = $app['config']['services.'.tenant()->type->getValueLower()];
 
                 return $socialite->buildProvider(SIVProvider::class, $config);
             }
