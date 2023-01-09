@@ -46,7 +46,7 @@
                 "Slakbal\\Oauth\\OauthServiceProvider"
             ],
             "aliases": {
-                "Oauth": "Slakbal\\Oauth\\Facade\\OAuth"
+                "Oauth": "Slakbal\\Oauth\\Facade\\Oauth"
             }
         }
     }

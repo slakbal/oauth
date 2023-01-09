@@ -7,6 +7,11 @@ use Slakbal\Oauth\Exceptions\OAuthException;
 
 class Oauth
 {
+    public function hallo()
+    {
+        return 'Hallo World';
+    }
+
     public function redirectToProvider($provider)
     {
         return Socialite::driver($this->providerAllowed($provider))->redirect();

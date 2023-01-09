@@ -1,6 +1,6 @@
 <?php
 
-namespace Slakbal\Oauth\Exception;
+namespace Slakbal\Oauth\Exceptions;
 
 use Exception;
 use Illuminate\Support\Facades\Log;
