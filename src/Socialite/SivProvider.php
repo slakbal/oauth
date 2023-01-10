@@ -7,6 +7,7 @@ use Illuminate\Support\Arr;
 use Laravel\Socialite\Two\AbstractProvider;
 use Laravel\Socialite\Two\InvalidStateException;
 use Laravel\Socialite\Two\ProviderInterface;
+use Slakbal\Oauth\Socialite\User;
 
 class SivProvider extends AbstractProvider implements ProviderInterface
 {
@@ -166,7 +167,7 @@ class SivProvider extends AbstractProvider implements ProviderInterface
      */
     protected function mapUserToObject(array $user)
     {
-        info('OAUTH', [$user]);
+        info('OAuth - User Identified', ['email' =>  Arr::get($user, 'mail')]);
 
         $firstName = Arr::get($user, 'givenName');
         $lastName = Arr::get($user, 'familyName');
