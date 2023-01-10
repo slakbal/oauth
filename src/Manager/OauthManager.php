@@ -8,22 +8,27 @@ use Slakbal\Oauth\Exceptions\AuthException;
 
 class OauthManager implements OauthContract
 {
-    public function ping()
+    public function ping(): string
     {
-        return 'Hallo World';
+        return 'Pong';
     }
 
-    public function redirectToProvider($provider)
+    /**
+     * Redirect the user to the authentication page for the provider.
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Illuminate\Http\RedirectResponse
+     */
+    public function redirectToProvider(string $provider): \Symfony\Component\HttpFoundation\RedirectResponse
     {
         return Socialite::driver($this->providerAllowed($provider))->redirect();
     }
 
-    public function user($provider)
+    public function user(string $provider): \Laravel\Socialite\Contracts\User
     {
         return Socialite::driver($this->providerAllowed($provider))->user();
     }
 
-    private function providerAllowed($provider)
+    private function providerAllowed(string $provider): string
     {
         $provider = $this->sanitizeValue($provider);
 
@@ -34,7 +39,7 @@ class OauthManager implements OauthContract
         return $provider;
     }
 
-    private function sanitizeValue($value)
+    private function sanitizeValue(string $value): string
     {
         return strtolower(trim($value));
     }

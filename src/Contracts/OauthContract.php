@@ -6,9 +6,9 @@ namespace Slakbal\Oauth\Contracts;
 
 interface OauthContract
 {
-    public function ping();
+    public function ping(): string;
 
-    public function redirectToProvider($provider);
+    public function redirectToProvider(string $provider): \Symfony\Component\HttpFoundation\RedirectResponse;
 
-    public function user($provider);
+    public function user(string $provider): \Laravel\Socialite\Contracts\User;
 }

@@ -8,6 +8,20 @@ use Laravel\Socialite\Two\User as BaseUser;
 class User extends BaseUser implements UserInterface
 {
     /**
+     * The user's first name.
+     *
+     * @var string
+     */
+    public $first_name;
+
+    /**
+     * The user's last name.
+     *
+     * @var string
+     */
+    public $last_name;
+
+    /**
      * The identity token.
      *
      * @var string

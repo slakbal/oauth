@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 class AuthException extends Exception
 {
-    public static function providerNotSupported($provider)
+    public static function providerNotSupported(string $provider): Exception
     {
         $message = __('Possible URL tampering. The `:provider` oauth provider is not supported.', ['provider' => $provider]);
 

@@ -30,7 +30,7 @@ class SivProvider extends AbstractProvider implements ProviderInterface
         'email',
     ];
 
-    protected function getBaseUrl()
+    protected function getBaseUrl(): string
     {
         return self::BASE_URL;
     }
@@ -38,7 +38,7 @@ class SivProvider extends AbstractProvider implements ProviderInterface
     /**
      * {@inheritdoc}
      */
-    protected function getAuthUrl($state)
+    protected function getAuthUrl($state): string
     {
         return $this->buildAuthUrlFromBase($this->getBaseUrl().'/accounts/authorize', $state);
     }
@@ -46,7 +46,7 @@ class SivProvider extends AbstractProvider implements ProviderInterface
     /**
      * {@inheritdoc}
      */
-    protected function getTokenUrl()
+    protected function getTokenUrl(): string
     {
         return $this->getBaseUrl().'/accounts/token';
     }
