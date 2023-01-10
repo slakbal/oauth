@@ -6,7 +6,7 @@ Setup Routes that point to your login controller:
 
 ```php
 Route::group([
-    'prefix' => 'oauth2',
+    'prefix' => 'oauth',
 ], function () {
 
     Route::match(['get', 'post'], '{provider}', 'LoginController@redirectToProvider')->name('oauth.redirect');

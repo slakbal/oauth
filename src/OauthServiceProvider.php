@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 // use Illuminate\Contracts\Support\DeferrableProvider;
 use Slakbal\Oauth\Providers\SivProvider;
 
-class AuthServiceProvider extends ServiceProvider //implements DeferrableProvider
+class OauthServiceProvider extends ServiceProvider //implements DeferrableProvider
 {
     /**
      * Register the application services.
@@ -20,8 +20,8 @@ class AuthServiceProvider extends ServiceProvider //implements DeferrableProvide
 
         // Register the main class to use with the facade
         $this->app->bind('oauth', function ($app, $parameters) {
-            dd(new Auth());
-            return new Auth();
+            dd(new Oauth());
+            return new Oauth();
         });
     }
 

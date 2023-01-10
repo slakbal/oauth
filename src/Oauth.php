@@ -5,7 +5,7 @@ namespace Slakbal\Oauth;
 use Laravel\Socialite\Facades\Socialite;
 use Slakbal\Oauth\Exceptions\AuthException;
 
-class Auth
+class Oauth
 {
     public function hallo()
     {

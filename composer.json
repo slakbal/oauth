@@ -1,10 +1,10 @@
 {
-    "name": "slakbal/siv-oauth",
-    "description": "SIV-OAuth2 Authentication Service Provider",
+    "name": "slakbal/oauth",
+    "description": "OAuth2 Authentication Service Provider",
     "keywords": [
         "oauth"
     ],
-    "homepage": "https://github.com/slakbal/siv-oauth",
+    "homepage": "https://github.com/slakbal/oauth",
     "license": "MIT",
     "type": "library",
     "authors": [
@@ -28,7 +28,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Slakbal\\OAuth\\": "src/"
+            "Slakbal\\Oauth\\": "src/"
         },
         "files": [
             "src/Helpers/helpers.php"
@@ -36,7 +36,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Slakbal\\OAuth\\Tests\\": "tests/"
+            "Slakbal\\Oauth\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -63,10 +63,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Slakbal\\Oauth\\AuthServiceProvider"
+                "Slakbal\\Oauth\\OauthServiceProvider"
             ],
             "aliases": {
-                "Auth": "Slakbal\\Oauth\\Facades\\Auth"
+                "Auth": "Slakbal\\Oauth\\Facades\\Oauth"
             }
         }
     },
