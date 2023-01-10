@@ -4,6 +4,7 @@ namespace Slakbal\Oauth\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Support\DeferrableProvider;
+use Slakbal\Oauth\Socialite\SivProvider;
 use Slakbal\Oauth\Contracts\OauthContract;
 use Slakbal\Oauth\Manager\OauthManager;
 
