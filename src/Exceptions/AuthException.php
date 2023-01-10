@@ -5,7 +5,7 @@ namespace Slakbal\Oauth\Exceptions;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
-class OAuthException extends Exception
+class AuthException extends Exception
 {
     public static function providerNotSupported($provider)
     {

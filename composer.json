@@ -1,6 +1,6 @@
 {
     "name": "slakbal/siv-oauth",
-    "description": "SIV-Oauth2",
+    "description": "SIV-OAuth2 Authentication Service Provider",
     "keywords": [
         "oauth"
     ],
@@ -15,14 +15,20 @@
         }
     ],
     "require": {
+        "php": "^8.1",
         "illuminate/support": "~9",
         "laravel/socialite": "*",
         "ext-json": "*"
     },
-    "require-dev": {},
+    "require-dev": {
+        "laravel/pint": "^1.3",
+        "orchestra/testbench": "^7.18",
+        "pestphp/pest": "^1.22",
+        "phpstan/phpstan": "^1.9"
+    },
     "autoload": {
         "psr-4": {
-            "Slakbal\\Oauth\\": "src"
+            "Slakbal\\OAuth\\": "src/"
         },
         "files": [
             "src/Helpers/helpers.php"
@@ -30,24 +36,40 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Slakbal\\Oauth\\Tests\\": "tests"
+            "Slakbal\\OAuth\\Tests\\": "tests/"
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+        "test-coverage": "./vendor/bin/phpunit --coverage-html coverage",
+        "test": "./vendor/bin/pest",
+        "fix": "./vendor/bin/pint",
+        "check": "./vendor/bin/pint --test -v",
+        "static": "./vendor/bin/phpstan analyse",
+        "all": [
+            "@test",
+            "@fix",
+            "@check",
+            "@static"
+        ]
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Slakbal\\Oauth\\OauthServiceProvider"
+                "Slakbal\\Oauth\\AuthServiceProvider"
             ],
             "aliases": {
-                "Oauth": "Slakbal\\Oauth\\Facade\\Oauth"
+                "Auth": "Slakbal\\Oauth\\Facades\\Auth"
             }
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

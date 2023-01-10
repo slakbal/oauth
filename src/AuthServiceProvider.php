@@ -3,23 +3,25 @@
 namespace Slakbal\Oauth;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Contracts\Support\DeferrableProvider;
+// use Illuminate\Contracts\Support\DeferrableProvider;
 use Slakbal\Oauth\Providers\SivProvider;
 
-class OauthServiceProvider extends ServiceProvider implements DeferrableProvider
+class AuthServiceProvider extends ServiceProvider //implements DeferrableProvider
 {
     /**
      * Register the application services.
      */
     public function register()
     {
-        // Automatically apply the package configuration, 
+        // dd('x');
+        // Automatically apply the package configuration,
         // so that is not really required to be published
         $this->mergeConfigFrom(__DIR__.'/../config/oauth.php', 'oauth');
 
         // Register the main class to use with the facade
         $this->app->bind('oauth', function ($app, $parameters) {
-            return new Oauth();
+            dd(new Auth());
+            return new Auth();
         });
     }
 
@@ -28,15 +30,13 @@ class OauthServiceProvider extends ServiceProvider implements DeferrableProvider
      */
     public function boot()
     {
-        if ($this->app->runningInConsole()) {
+        // dd('y');
 
+        if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/oauth.php' => config_path('oauth.php'),
             ], 'config');
-
-        } 
-        else {
-        
+        } else {
             $socialite = $this->app->make('Laravel\Socialite\Contracts\Factory');
 
             $socialite->extend(
@@ -48,7 +48,6 @@ class OauthServiceProvider extends ServiceProvider implements DeferrableProvider
                     return $socialite->buildProvider(SIVProvider::class, $config);
                 }
             );
-
         }
     }
 }

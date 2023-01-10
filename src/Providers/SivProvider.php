@@ -13,7 +13,7 @@ class SivProvider extends AbstractProvider implements ProviderInterface
     /**
      * Unique Provider Identifier.
      */
-    const IDENTIFIER = 'SIV';
+    public const IDENTIFIER = 'SIV';
 
     private const BASE_URL = 'https://accounts.siv.de';
 
@@ -131,7 +131,7 @@ class SivProvider extends AbstractProvider implements ProviderInterface
     public function user()
     {
         if ($this->hasInvalidState()) {
-            throw new InvalidStateException;
+            throw new InvalidStateException();
         }
 
         $response = $this->getAccessTokenResponse($this->getCode());
@@ -171,7 +171,7 @@ class SivProvider extends AbstractProvider implements ProviderInterface
         $firstName = Arr::get($user, 'givenName');
         $lastName = Arr::get($user, 'familyName');
 
-        return (new User)->setRaw($user)->map([
+        return (new User())->setRaw($user)->map([
             'id' => Arr::get($user, 'id', null),
             'nickname' => $firstName,
             'name' => $firstName.' '.$lastName,
@@ -191,7 +191,9 @@ class SivProvider extends AbstractProvider implements ProviderInterface
     protected function getTokenFields($code)
     {
         return Arr::add(
-            parent::getTokenFields($code), 'grant_type', 'authorization_code'
+            parent::getTokenFields($code),
+            'grant_type',
+            'authorization_code'
         );
     }
 

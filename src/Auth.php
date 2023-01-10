@@ -3,9 +3,9 @@
 namespace Slakbal\Oauth;
 
 use Laravel\Socialite\Facades\Socialite;
-use Slakbal\Oauth\Exceptions\OAuthException;
+use Slakbal\Oauth\Exceptions\AuthException;
 
-class Oauth
+class Auth
 {
     public function hallo()
     {
@@ -27,7 +27,7 @@ class Oauth
         $provider = $this->sanitizeValue($provider);
 
         if (! in_array($provider, config('oauth.providers.allowed'))) {
-            throw OAuthException::providerNotSupported($provider);
+            throw AuthException::providerNotSupported($provider);
         }
 
         return $provider;

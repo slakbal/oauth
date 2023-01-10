@@ -1,10 +1,10 @@
 <?php
 
-namespace Slakbal\Oauth\Facade;
+namespace Slakbal\Oauth\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Oauth extends Facade
+final class Auth extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -14,5 +14,6 @@ class Oauth extends Facade
     protected static function getFacadeAccessor()
     {
         return 'oauth';
+        // return Auth::class;
     }
 }
