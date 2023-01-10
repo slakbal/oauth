@@ -1,28 +1,50 @@
 <?php
 
-namespace Slakbal\Oauth;
+namespace Slakbal\Oauth\Providers;
 
 use Illuminate\Support\ServiceProvider;
-// use Illuminate\Contracts\Support\DeferrableProvider;
-use Slakbal\Oauth\Providers\SivProvider;
+use Illuminate\Contracts\Support\DeferrableProvider;
+use Slakbal\Oauth\Contracts\OauthContract;
+use Slakbal\Oauth\Manager\OauthManager;
 
-class OauthServiceProvider extends ServiceProvider //implements DeferrableProvider
+class PackageServiceProvider extends ServiceProvider implements DeferrableProvider
 {
+    /**
+    * All of the container bindings that should be registered.
+    *
+    * @var array<class-string,class-string>
+    */
+    // public $bindings = [
+    //     OauthContract::class => OauthManager::class,
+    // ];
+
+    /**
+     * All of the container singletons that should be registered.
+     *
+     * @var array
+     */
+    public $singletons = [
+        OauthContract::class => OauthManager::class,
+    ];
+
+    /**
+     * Get the services provided by the provider. Needed for deferred service providers
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return [OauthContract::class];
+    }
+
     /**
      * Register the application services.
      */
     public function register()
     {
-        // dd('x');
         // Automatically apply the package configuration,
         // so that is not really required to be published
-        $this->mergeConfigFrom(__DIR__.'/../config/oauth.php', 'oauth');
-
-        // Register the main class to use with the facade
-        $this->app->bind('oauth', function ($app, $parameters) {
-            dd(new Oauth());
-            return new Oauth();
-        });
+        $this->mergeConfigFrom(__DIR__.'/../../config/oauth.php', 'oauth');
     }
 
     /**
@@ -30,8 +52,6 @@ class OauthServiceProvider extends ServiceProvider //implements DeferrableProvid
      */
     public function boot()
     {
-        // dd('y');
-
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/oauth.php' => config_path('oauth.php'),

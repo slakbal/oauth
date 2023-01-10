@@ -63,11 +63,11 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Slakbal\\Oauth\\OauthServiceProvider"
+                "Slakbal\\Oauth\\Providers\\PackageServiceProvider"
             ],
-            "aliases": {
-                "Auth": "Slakbal\\Oauth\\Facades\\Oauth"
-            }
+            "aliases": [
+                "Slakbal\\Oauth\\Facades\\Oauth"
+            ]
         }
     },
     "minimum-stability": "dev",

@@ -1,13 +1,14 @@
 <?php
 
-namespace Slakbal\Oauth;
+namespace Slakbal\Oauth\Manager;
 
 use Laravel\Socialite\Facades\Socialite;
+use Slakbal\Oauth\Contracts\OauthContract;
 use Slakbal\Oauth\Exceptions\AuthException;
 
-class Oauth
+class OauthManager implements OauthContract
 {
-    public function hallo()
+    public function ping()
     {
         return 'Hallo World';
     }

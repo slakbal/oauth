@@ -1,6 +1,6 @@
 <?php
 
-namespace Slakbal\Oauth\Providers;
+namespace Slakbal\Oauth\Socialite;
 
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Arr;

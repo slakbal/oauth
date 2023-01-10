@@ -1,6 +1,6 @@
 <?php
 
-namespace Slakbal\Oauth\Providers;
+namespace Slakbal\Oauth\Socialite;
 
 use Slakbal\Oauth\Contracts\UserInterface;
 use Laravel\Socialite\Two\User as BaseUser;
